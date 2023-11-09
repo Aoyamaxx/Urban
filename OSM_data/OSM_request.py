@@ -42,6 +42,7 @@ for index, row in df.iterrows():
     lat = row['Lat']
     lon = row['Long']
     location = row['Location'].replace("/", "_").replace(" ", "_")
+    location_id = row['ID']
     radius = 1000  # Radius in meters
     
     # Create the Overpass QL query for the specified tags
@@ -61,7 +62,7 @@ for index, row in df.iterrows():
         data = response.json()
         
         # Write the data to an output file
-        output_file = os.path.join(output_directory, f"{location}.json")
+        output_file = os.path.join(output_directory, f"{location}_{location_id}.json")
         with open(output_file, 'w') as outfile:
             json.dump(data, outfile)
     else:

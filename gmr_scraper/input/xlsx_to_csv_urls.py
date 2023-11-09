@@ -20,7 +20,9 @@ def process_excel_file(excel_path):
             if y_cor is not None and x_cor is not None:
                 df.at[index, 'Lat'] = y_cor
                 df.at[index, 'Long'] = x_cor
-
+                
+    df.insert(5, 'ID', range(1, len(df) + 1))
+    
     output_csv_path = 'urls.csv'
     df.to_csv(output_csv_path, index=False)
 
