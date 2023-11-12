@@ -174,7 +174,7 @@ try:
 
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=chrome_options)
     
-    input_data = read_input_csv(r'input\urls.csv')
+    input_data = read_input_csv('input/urls.csv')
     location_list = []
     
     for data in input_data:
