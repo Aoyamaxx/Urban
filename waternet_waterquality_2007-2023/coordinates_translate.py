@@ -1,6 +1,5 @@
 from rijksdriehoek import rijksdriehoek
 
-
 def convert_cor(x, y):
 
     rd = rijksdriehoek.Rijksdriehoek()
