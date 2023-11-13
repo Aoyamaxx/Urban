@@ -30,7 +30,7 @@ def clean_review(text):
         
     return text
 
-file = "by_newest_20231112_121009"
+file = "by_newest_20231113_000949"
 file_name = f"{file}.csv"
 file_path = f'output/{file_name}'
 df = pd.read_csv(file_path, na_values='NA')

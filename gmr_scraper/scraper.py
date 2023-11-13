@@ -27,7 +27,7 @@ def read_input_csv(filename):
         csv_reader = csv.DictReader(file)
         return list(csv_reader)
 
-def scroll_and_expand_reviews(driver, timeout=2, max_scroll_attempts=25):
+def scroll_and_expand_reviews(driver, timeout=2, max_scroll_attempts=30):
     print("Scrolling down to load reviews and turn off auto-translation...")
     actions = ActionChains(driver)
     previous_length = 0
@@ -66,6 +66,9 @@ def scroll_and_expand_reviews(driver, timeout=2, max_scroll_attempts=25):
         elif scroll_attempts == 20:
             time.sleep(2)
             scroll_attempts += 1
+        elif scroll_attempts == 25:
+            time.sleep(3)
+            scroll_attempts += 1
         else:
             scroll_attempts += 1  # Increment the counter if no new reviews are found
 
@@ -88,7 +91,7 @@ def safe_extract(element, class_name, attribute=None):
     except NoSuchElementException:
         return 'NA'
 
-def scroll_and_extract_reviews(driver, csv_filename, location_name, location_status, timeout=2, max_scroll_attempts=10):
+def scroll_and_extract_reviews(driver, csv_filename, location_name, location_status, unique_location_name, timeout=2, max_scroll_attempts=10):
     print("Scrolling down and extracting reviews...")
     actions = ActionChains(driver)
     file_exists = os.path.exists(csv_filename)  # Check if the file already exists
@@ -96,7 +99,7 @@ def scroll_and_extract_reviews(driver, csv_filename, location_name, location_sta
     with open(csv_filename, mode='a', newline='', encoding='utf-8') as file:  # Open file in append mode
         writer = csv.writer(file)
         if not file_exists:  # If the file does not exist, write the header
-            header = ['Location', 'Status', 'Reviewer', 'Rating', 'Relative time', 'Scraping time', 'Review']
+            header = ['Location', "Location_Unique", 'Status', 'Reviewer', 'Rating', 'Relative time', 'Scraping time', 'Review']
             writer.writerow(header)
 
         previous_length = 0
@@ -120,7 +123,7 @@ def scroll_and_extract_reviews(driver, csv_filename, location_name, location_sta
                     scraping_time = datetime.now().strftime("%Y-%m-%d,%H:%M:%S")
 
                     # Write the review to the CSV file
-                    writer.writerow([location_name, location_status, reviewer, rating, relative_time, scraping_time, review_text])
+                    writer.writerow([location_name, unique_location_name, location_status, reviewer, rating, relative_time, scraping_time, review_text])
 
                 previous_length = len(review_containers)
                 scroll_attempts = 0
@@ -181,6 +184,7 @@ try:
         url = data['URL']
         location_name = data['Location']
         location_status = data['Status']
+        unique_location_name = data["Location_Unique"]
         driver.get(url)
         location_list.append(location_name)
 
@@ -204,7 +208,7 @@ try:
         scroll_and_expand_reviews(driver, timeout=0.1, max_scroll_attempts=10)
 
         # Extract the reviews and write them to the output CSV file
-        scroll_and_extract_reviews(driver, output_filename, timeout=0.1, location_name=location_name, location_status=location_status)  # Pass the location name
+        scroll_and_extract_reviews(driver, output_filename, timeout=0.1, location_name=location_name, location_status=location_status, unique_location_name=unique_location_name)
         
         print(f"Scraping Google Maps Reviews for [{location_name}] is finished.")
 
