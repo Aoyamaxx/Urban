@@ -21,6 +21,6 @@ df['Cleaned_Review'] = df['Translated_Review'].apply(preprocess_text)
 
 # Save the cleaned data to a new CSV file
 cleaned_file_path = f'final_cleaned_reviews/{file}_clean.csv'  # Replace with your desired file path
-df.to_csv(cleaned_file_path, index=False)
+df.to_csv(cleaned_file_path, index=False, na_rep='NA')
 
 print(f"Cleaned data saved to {cleaned_file_path}")
