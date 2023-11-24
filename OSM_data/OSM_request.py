@@ -23,8 +23,18 @@ tags = [
     {'key': 'amenity', 'value': 'dressing_room'}, 
     {'key': 'amenity', 'value': 'bench'}, 
     {'key': 'amenity', 'value': 'lounger'}, 
+    {'key': 'amenity', 'value': 'charging_station'},
+    {'key': 'amenity', 'value': 'waste_basket'},
+    {'key': 'amenity', 'value': 'ice_cream'},
+    {'key': 'landuse', 'value': 'residential'},
+    {'key': 'landuse', 'value': 'grass'},
+    {'key': 'leisure', 'value': 'park'},
+    {'key': 'shop', 'value': 'beverage'},
+    {'key': 'shop', 'value': 'supermarket'},
+    {'key': 'building', 'value': 'toilets'},
     {'key': 'emergency', 'value': 'lifeguard'}, 
     {'key': 'emergency', 'value': 'life_ring'}, 
+    
     # {'key': 'leisure', 'value': 'playground'}, 
     ]
 
