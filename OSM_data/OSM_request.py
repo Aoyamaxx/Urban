@@ -58,7 +58,7 @@ for index, row in df.iterrows():
     lon = row['Long']
     location = row['Location'].replace("/", "_").replace(" ", "_")
     location_id = row['ID']
-    radius = 1000  # Radius in meters
+    radius = 500  # Radius in meters
     
     # Create the Overpass QL query for the specified tags
     overpass_query = create_query(radius, lat, lon, tags)
