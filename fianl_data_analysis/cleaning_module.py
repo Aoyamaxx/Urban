@@ -24,7 +24,7 @@ def clean_translate_reviews(input_file_path, urls_file_path, output_file_path, d
     
     df.drop('Location', axis=1, inplace=True)
     
-    # Define the emoji pattern
+    # Define the emoji patternpip 
     emoji_pattern = re.compile(
         "["
         "\U0001F600-\U0001F64F"  # Emoticons (smileys and emotion-related emojis)

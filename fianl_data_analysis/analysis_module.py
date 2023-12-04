@@ -76,8 +76,8 @@ def calculate_amenity_scores(input_file_path, output_file_path, data_folder):
     # Create a DataFrame for output
     output_df = pd.DataFrame({
         'Location': locations,
-        'Score': scores,
-        'Normalized Score': normalized_scores
+        'Amenities_Score': scores,
+        'Normalized_Amenities_Score': normalized_scores
     })
 
     output_df.to_csv(output_file_path, index=False)
